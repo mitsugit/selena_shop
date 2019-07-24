@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+	Order History - Selena Shop
+{% endblock %}
+{% block content %}
+	<div>
+		<div class="text-center">
+			<br>
+			<h1 class="text-center my_title">注文履歴</h1>
+			<br>
+			{% if order_details %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Order Number</th>
+						<th>Order Date</th>
+						<th>Total Amount</th>
+						<th>Status</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in order_details %}
+					<tr>
+						<td>{{ order.id }}</td>
+						<td>{{ order.created|date:"Y 年 M d 日" }}</td>
+						<td>{{ order.total }}</td>
+						<td><i class="fas fa-check"></i>&nbsp;Complete</td>
+						<td><a href="{% url 'order:order_detail' order.id %}">View order</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<p>注文履歴はありません。<br><br><a href="{% url 'shop:allProdCat' %}" class="btn btn-secondary">ショッピングを続ける</a></p>
+			{% endif %}
+		</div>
+	</div>
+	<br>
+	<br>
+{% endblock %}

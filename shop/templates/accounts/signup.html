@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block metadescription %}
+	Sign up to get a new account with us. The perfect cushion store has a variety of stunning and comfy cushions.
+{% endblock %}
+{% block title %}
+	Create a New Account - Perfect Cushion Store
+{% endblock %}
+{% block content %}
+	<div>
+		{% if not form.is_valid %}
+			<div class="mx-auto">
+				<br>
+				<h1 class="my_title text-center">新規アカウント登録</h1>
+				<br>
+				<div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+					<br>
+					<p>下記の登録内容をご入力ください.</p>
+					<form method="post">
+						{% csrf_token %}
+						<p>{{ form | crispy }}</p>
+						<button type="submit" class="btn btn-secondary">登録</button>
+					</form>
+					<br>
+				</div>
+			</div>
+		{% else %}
+			<div class="mx-auto">
+				<br>
+				<h1 class="my_title text-center">アカウント登録完了</h1>
+				<br>
+				<div>
+					<p>
+						会員登録ありがとうございます,
+						<br>
+						<br>
+						アカウントが正常に登録されました。
+						<br>
+						<a href="{% url 'shop:allProdCat' %}">ショッピングを続ける</a>
+					</p>
+				</div>
+			</div>
+
+		{% endif %}
+	</div>
+	<br>
+{% endblock %}
